@@ -1,11 +1,17 @@
+const music = new Audio(`assets/audio/music-v2.mp3`);
 function startShow() {
 	const container = document.querySelector('.container');
 	const stage = document.querySelector('.stage');
+	const credit = document.querySelector('.credit');
+	credit.style.display = 'none';
 	container.dataset.open = 1;
 
 	setTimeout(() => {
 		stage.dataset.light = 1;
-		runScript();
+		music.play();
+		setTimeout(() => {
+			runScript();
+		}, 4000)
 	}, 2000)
 }
 
@@ -25,6 +31,7 @@ let scriptLines = [
 	"you should be!",
 	"you should be excited",
 	"for this website",
+	2000,
 	"but first ground rules",
 	"let’s set some ground rules",
 	"first rule",
@@ -55,6 +62,7 @@ let scriptLines = [
 	"you can do a little recording",
 	"i don’t mind",
 	"it’s ok",
+	1000,
 	"well that’s it",
 	"those are the rules",
 	"in that case",
@@ -70,23 +78,30 @@ let scriptLines = [
 ]
 
 let currentLine = 0;
+let actualLine = 0;
 const scriptText = document.querySelector('.script-text');
-const music = new Audio(`assets/audio/music.mp3`);
-music.loop = true;
-music.volume = 0.2;
+const scriptShadow = document.querySelector('.script-shadow');
 function runScript() {
-	if (currentLine == 0) {
-		music.play();
-	}
-	scriptText.innerHTML = "<p>"+scriptLines[currentLine]+"</p>";
-	let scriptAudio = new Audio(`assets/audio/lines/line${currentLine}.mp3`);
-	scriptAudio.autoplay = true;
-	scriptAudio.addEventListener('ended', () => {
-		currentLine++;
-		if (currentLine == scriptLines.length) {
-			location.reload();
-		} else {
+	if (typeof(scriptLines[currentLine]) == 'number') {
+		scriptText.innerHTML = '';
+		scriptShadow.innerHTML = '';
+		setTimeout(() => {
+			currentLine++;
 			runScript();
-		}
-	})
+		}, scriptLines[currentLine])
+	} else {
+		scriptText.innerHTML = "<p>"+scriptLines[currentLine]+"</p>";
+		scriptShadow.innerHTML = "<p>"+scriptLines[currentLine]+"</p>";
+		let scriptAudio = new Audio(`assets/audio/lines/line${actualLine}.mp3`);
+		scriptAudio.autoplay = true;
+		scriptAudio.addEventListener('ended', () => {
+			currentLine++;
+			actualLine++;
+			if (currentLine == scriptLines.length) {
+				location.reload();
+			} else {
+				runScript();
+			}
+		})
+	}
 }

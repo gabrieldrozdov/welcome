@@ -17,6 +17,23 @@ body {
 	position: relative;
 }
 
+/* Credits */
+.credit {
+	position: absolute;
+	bottom: 10px;
+	left: 50%;
+	transform: translateX(-50%);
+	text-align: center;
+	white-space: nowrap;
+	font-family: 'Arial', sans-serif;
+	z-index: 999;
+	font-size: 10px;
+	line-height: 1.2em;
+	font-weight: bold;
+	color: #e14c5f;
+	opacity: .5;
+}
+
 /* Ticket */
 .ticket-parent {
 	position: absolute;
@@ -233,10 +250,10 @@ body {
 }
 @keyframes stage-light-loop {
 	from {
-		filter: brightness(100%) blur(0px);
+		filter: brightness(100%) blur(0px) saturate(100%);
 	}
 	to {
-		filter: brightness(80%) blur(1px) saturate(80%);
+		filter: brightness(70%) blur(1px) saturate(70%);
 	}
 }
 .stage-fog {
@@ -247,10 +264,9 @@ body {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
-	mix-blend-mode: soft-light;
+	mix-blend-mode: overlay;
 	transform-origin: center bottom;
 	display: none;
-	filter: blur(2deg);
 }
 .stage[data-light="1"] .stage-fog {
 	display: block;
@@ -266,9 +282,17 @@ body {
 		transform: translateX(-50%) scale(2);
 		opacity: 0;
 	}
+	25% {
+		transform: translateX(-25%) scale(2);
+		opacity: 1;
+	}
 	50% {
 		opacity: 1;
 		transform: translateX(0) scale(2);
+	}
+	75% {
+		transform: translateX(25%) scale(2);
+		opacity: 1;
 	}
 	100% {
 		transform: translateX(50%) scale(2);
@@ -280,9 +304,17 @@ body {
 		transform: translateX(50%) scale(2);
 		opacity: 0;
 	}
+	25% {
+		transform: translateX(25%) scale(2);
+		opacity: 1;
+	}
 	50% {
 		opacity: 1;
 		transform: translateX(0) scale(2);
+	}
+	75% {
+		transform: translateX(-25%) scale(2);
+		opacity: 1;
 	}
 	100% {
 		transform: translateX(-50%) scale(2);
@@ -307,21 +339,68 @@ body {
 }
 .script-text {
 	transform-style: preserve-3d;
-	transform: rotateX(5deg);
+	/* transform: rotateX(5deg); */
+	animation: script-text 5s infinite alternate ease-in-out;
+}
+.script-text p {
+	animation: script-text-in .5s;
+}
+@keyframes script-text {
+	from {
+		transform: translateY(.5em);
+	}
+	to {
+		transform: translateY(-.5em);
+	}
+}
+@keyframes script-text-in {
+	from {
+		filter: blur(2px);
+	}
+	to {
+		filter: blur(0px);
+	}
 }
 .script-text p {
 	text-align: center;
 	color: white;
-	font-size: 2.5vw;
+	font-size: 2vw;
 	padding: 20vmin 10px 10px 10px;
 	line-height: 1em;
 	-webkit-text-stroke: .01em black;
 	font-weight: bold;
 	font-family: "Arial", sans-serif;
 	animation: script-text-in 2s cubic-bezier(0.22, 1, 0.36, 1);
-	text-shadow: 0 10vw 10px rgba(0,0,0,.5);
+	/* text-shadow: 0 10vw 10px rgba(0,0,0,.5); */
 }
 .script-shadow {
+	position: absolute;
+	top: 50%;
+	left: 50%;
 	transform-style: preserve-3d;
-	/* transform: rotateX(15deg); */
+	transform: rotateX(15deg) translate(-50%, -50%);
+	animation: script-shadow 5s infinite alternate ease-in-out;
+	opacity: .8;
+}
+.script-shadow p {
+	text-align: center;
+	color: black;
+	font-size: 1.5vw;
+	line-height: 1em;
+	-webkit-text-stroke: .01em black;
+	font-weight: bold;
+	font-family: "Arial", sans-serif;
+	animation: script-text-in 2s cubic-bezier(0.22, 1, 0.36, 1);
+	display: inline-block;
+	width: min-content;
+}
+@keyframes script-shadow {
+	from {
+		transform: rotateX(10deg) translate(-50%, 22vmin) scaleY(-1);
+		filter: blur(.2em);
+	}
+	to {
+		transform: rotateX(10deg) translate(-50%, 24vmin) scaleY(-1);
+		filter: blur(.4em);
+	}
 }
