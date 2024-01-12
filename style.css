@@ -221,21 +221,19 @@ body {
 .stage-dark {
 	position: absolute;
 	z-index: 0;
-	top: 0;
-	left: 0;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	width: 100%;
-	height: 100%;
-	object-fit: contain;
 }
 .stage-light {
 	position: absolute;
 	z-index: 1;
-	top: 0;
-	left: 0;
+	top: 50%;
+	left: 50%;
 	width: 100%;
-	height: 100%;
-	object-fit: contain;
 	opacity: 0;
+	transform: translate(-50%, -50%);
 }
 .stage[data-light="1"] .stage-light {
 	opacity: 1;
@@ -244,11 +242,11 @@ body {
 @keyframes stage-light-in {
 	from {
 		filter: brightness(200%) blur(10px);
-		transform: scale(1.05);
+		transform: translate(-50%, -50%) scale(1.05);
 	}
 	to {
 		filter: brightness(100%) blur(0px);
-		transform: scale(1);
+		transform: translate(-50%, -50%) scale(1);
 	}
 }
 @keyframes stage-light-loop {
@@ -386,6 +384,7 @@ body {
 	color: black;
 	font-size: 1.5vw;
 	width: 100vw;
+	height: 0;
 	line-height: 1em;
 	-webkit-text-stroke: .01em black;
 	font-weight: bold;
@@ -396,11 +395,35 @@ body {
 }
 @keyframes script-shadow {
 	from {
-		transform: rotateX(10deg) translate(-50%, 22vmin) scaleY(-1);
+		transform: rotateX(10deg) translate(-50%, 12vw) scaleY(-1);
 		filter: blur(.2em);
 	}
 	to {
-		transform: rotateX(10deg) translate(-50%, 24vmin) scaleY(-1);
+		transform: rotateX(10deg) translate(-50%, 14vw) scaleY(-1);
 		filter: blur(.4em);
+	}
+}
+@media only screen and (max-width: 600px) {
+	@keyframes script-shadow {
+		from {
+			transform: rotateX(10deg) translate(-50%, 16vw) scaleY(-1);
+			filter: blur(.2em);
+		}
+		to {
+			transform: rotateX(10deg) translate(-50%, 18vw) scaleY(-1);
+			filter: blur(.4em);
+		}
+	}
+}
+@media only screen and (max-width: 1000px) {
+	@keyframes script-shadow {
+		from {
+			transform: rotateX(10deg) translate(-50%, 14vw) scaleY(-1);
+			filter: blur(.2em);
+		}
+		to {
+			transform: rotateX(10deg) translate(-50%, 16vw) scaleY(-1);
+			filter: blur(.4em);
+		}
 	}
 }
