@@ -219,7 +219,7 @@ body {
 }
 .stage[data-light="1"] .stage-light {
 	opacity: 1;
-	animation: stage-light-in 2s cubic-bezier(0.25, 1, 0.5, 1), stage-light-loop 1s 2s infinite alternate;
+	animation: stage-light-in 2s cubic-bezier(0.25, 1, 0.5, 1), stage-light-loop 4s 2s infinite alternate;
 }
 @keyframes stage-light-in {
 	from {
