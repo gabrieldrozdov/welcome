@@ -1,0 +1,327 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+img {
+	display: block;
+	width: 100%;
+}
+body {
+	background-color: black;
+}
+.container {
+	width: 100vw;
+	height: 100dvh;
+	overflow: hidden;
+	position: relative;
+}
+
+/* Ticket */
+.ticket-parent {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 999;
+	transform: translate(-50%, 0%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	animation: ticket-in 3s;
+	z-index: 6;
+}
+.container[data-open="1"] .ticket-parent {
+	animation: ticket-out 1s forwards;
+}
+@keyframes ticket-in {
+	from {
+		transform: translate(-50%, 150vh) rotate(-500deg);
+	}
+	to {
+		transform: translate(-50%, 0vh);
+	}
+}
+@keyframes ticket-out {
+	from {
+		transform: translate(-50%, 0vh);
+	}
+	to {
+		transform: translate(-50%, 150vh) rotate(500deg);
+	}
+}
+.ticket {
+	width: 25vw;
+	min-width: 200px;
+	max-width: 400px;
+	transform: rotate(-2deg);
+	cursor: pointer;
+	transition: transform .2s;
+}
+.ticket:hover {
+	transform: scale(1.2) rotate(2deg);
+}
+.ticket:active {
+	transform: scale(1.1) rotate(1deg);
+}
+
+/* Curtains */
+.curtain {
+	width: 100vw;
+	height: 100dvh;
+	position: absolute;
+	top: 0;
+	left: 0;
+	pointer-events: none;
+	overflow: hidden;
+	animation: curtain-in 3s;
+	z-index: 5;
+}
+@keyframes curtain-in {
+	from {
+		filter: blur(10px) brightness(50%);
+		transform: scale(2);
+	}
+	to {
+		filter: blur(0px) brightness(100%);
+		transform: scale(1);
+	}
+}
+.curtain-top {
+	filter: brightness(50%) blur(4px);
+	transform: scale(1.1, .8);
+	transform-origin: top center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 4;
+	transition: transform 1s .2s cubic-bezier(0.45, 0, 0.55, 1);
+}
+.curtain-side-left {
+	filter: brightness(40%) blur(3px);
+	transform: scale(1.1);
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 120%;
+	width: 20%;
+	z-index: 3;
+	transition: transform .5s .3s cubic-bezier(0.45, 0, 0.55, 1);
+}
+.curtain-side-right {
+	filter: brightness(40%) blur(3px);
+	transform: scale(1.1) rotateY(-180deg);
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 120%;
+	width: 20%;
+	z-index: 3;
+	transition: transform .5s .3s cubic-bezier(0.45, 0, 0.55, 1);
+}
+.curtain-drape-left {
+	filter: brightness(70%) blur(2px);
+	transform: scale(1.1);
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 120%;
+	width: 20%;
+	z-index: 5;
+	transition: transform 1s cubic-bezier(0.45, 0, 0.55, 1);
+}
+.curtain-drape-right {
+	filter: brightness(70%) blur(2px);
+	transform: scale(1.1) rotateY(-180deg);
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 100%;
+	width: 20%;
+	z-index: 5;	
+	transition: transform 1s cubic-bezier(0.45, 0, 0.55, 1);
+}
+.curtain-left {
+	filter: brightness(30%) blur(4px);
+	transform: scale(1.1);
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 50%;
+	object-fit: cover;
+	object-position: right center;
+	transition: transform 1s .5s cubic-bezier(0.45, 0, 0.55, 1);
+}
+.curtain-right {
+	filter: brightness(30%) blur(4px);
+	transform: scale(1.1);
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 100%;
+	width: 50%;
+	object-fit: cover;
+	object-position: left center;
+	transition: transform 1s .5s cubic-bezier(0.45, 0, 0.55, 1);
+}
+.container[data-open="1"] .curtain-top {
+	transform: scale(1.1) translateY(-100%);
+}
+.container[data-open="1"] .curtain-left {
+	transform: scale(1.1) translateX(-100%);
+}
+.container[data-open="1"] .curtain-right {
+	transform: scale(1.1) translateX(100%);
+}
+.container[data-open="1"] .curtain-drape-left {
+	transform: scale(1.1) translateX(-100%);
+}
+.container[data-open="1"] .curtain-drape-right {
+	transform: scale(1.1) rotateY(-180deg) translateX(-100%);
+}
+.container[data-open="1"] .curtain-side-left {
+	transform: scale(1.1) translateX(-100%);
+}
+.container[data-open="1"] .curtain-side-right {
+	transform: scale(1.1) rotateY(-180deg) translateX(-100%);
+}
+
+/* Stage */
+.stage {
+	position: absolute;
+	z-index: 0;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100dvh;
+	background-color: black;
+	pointer-events: none;
+}
+.stage-dark {
+	position: absolute;
+	z-index: 0;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+.stage-light {
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	opacity: 0;
+}
+.stage[data-light="1"] .stage-light {
+	opacity: 1;
+	animation: stage-light-in 2s cubic-bezier(0.25, 1, 0.5, 1), stage-light-loop 1s 2s infinite alternate;
+}
+@keyframes stage-light-in {
+	from {
+		filter: brightness(200%) blur(10px);
+		transform: scale(1.05);
+	}
+	to {
+		filter: brightness(100%) blur(0px);
+		transform: scale(1);
+	}
+}
+@keyframes stage-light-loop {
+	from {
+		filter: brightness(100%) blur(0px);
+	}
+	to {
+		filter: brightness(80%) blur(1px) saturate(80%);
+	}
+}
+.stage-fog {
+	position: absolute;
+	z-index: 2;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	mix-blend-mode: soft-light;
+	transform-origin: center bottom;
+	display: none;
+	filter: blur(2deg);
+}
+.stage[data-light="1"] .stage-fog {
+	display: block;
+}
+.stage-fog1 {
+	animation: stage-fog1-move 13s infinite linear;
+}
+.stage-fog2 {
+	animation: stage-fog2-move 15s -2.5s infinite linear;
+}
+@keyframes stage-fog1-move {
+	0% {
+		transform: translateX(-50%) scale(2);
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+		transform: translateX(0) scale(2);
+	}
+	100% {
+		transform: translateX(50%) scale(2);
+		opacity: 0;
+	}
+}
+@keyframes stage-fog2-move {
+	0% {
+		transform: translateX(50%) scale(2);
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+		transform: translateX(0) scale(2);
+	}
+	100% {
+		transform: translateX(-50%) scale(2);
+		opacity: 0;
+	}
+}
+
+/* Script */
+.script {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100dvh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 2;
+	pointer-events: none;
+	white-space: nowrap;
+	perspective: 100px;
+}
+.script-text {
+	transform-style: preserve-3d;
+	transform: rotateX(5deg);
+}
+.script-text p {
+	text-align: center;
+	color: white;
+	font-size: 2.5vw;
+	padding: 20vmin 10px 10px 10px;
+	line-height: 1em;
+	-webkit-text-stroke: .01em black;
+	font-weight: bold;
+	font-family: "Arial", sans-serif;
+	animation: script-text-in 2s cubic-bezier(0.22, 1, 0.36, 1);
+	text-shadow: 0 10vw 10px rgba(0,0,0,.5);
+}
+.script-shadow {
+	transform-style: preserve-3d;
+	/* transform: rotateX(15deg); */
+}
