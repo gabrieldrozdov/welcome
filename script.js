@@ -1,6 +1,7 @@
 const music = new Audio(`assets/audio/music-v2.mp3`);
 
 function startShow() {
+	Tone.start();
 	const container = document.querySelector('.container');
 	const stage = document.querySelector('.stage');
 	const credit = document.querySelector('.credit');
@@ -102,7 +103,7 @@ function runScript() {
 		scriptText.innerHTML = "<p>"+scriptLines[currentLine]+"</p>";
 		scriptShadow.innerHTML = "<p>"+scriptLines[currentLine]+"</p>";
 		players[actualLine].start();
-		players[actualLine].onstop = () => {
+		setTimeout(() => {
 			currentLine++;
 			actualLine++;
 			if (currentLine == scriptLines.length) {
@@ -110,7 +111,8 @@ function runScript() {
 			} else {
 				runScript();
 			}
-		};
+		}, players[actualLine].buffer.duration*1000)
+		
 		// OLD CODE (doesnt work on mobile safari)
 		// let scriptAudio = new Audio(`assets/audio/lines/line${actualLine}.mp3`);
 		// scriptAudio.autoplay = true;
