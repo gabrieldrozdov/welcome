@@ -385,23 +385,24 @@ body {
 	top: 50%;
 	left: 50%;
 	transform-style: preserve-3d;
-	transform: rotateX(15deg) translate(-50%, -50%);
+	width: 100vw;
+	transform: rotateX(15deg) translate(-50%, -50%) scale(-1);
 	animation: script-shadow 5s infinite alternate ease-in-out;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 .script-shadow p {
 	text-align: center;
 	color: black;
 	font-size: 1.5vw;
 	width: 100vw;
-	white-space: nowrap;
-	height: 0;
 	line-height: 1em;
 	-webkit-text-stroke: .01em black;
 	font-weight: bold;
 	font-family: "Arial", sans-serif;
 	animation: script-text-in 2s cubic-bezier(0.22, 1, 0.36, 1);
 	display: inline-block;
-	width: min-content;
 }
 @keyframes script-shadow {
 	from {
@@ -416,11 +417,11 @@ body {
 @media only screen and (max-width: 1200px) {
 	@keyframes script-shadow {
 		from {
-			transform: rotateX(10deg) translate(-50%, 15vw) scaleY(-1);
+			transform: rotateX(15deg) translate(-50%, 15vw) scaleY(-1);
 			filter: blur(.2em);
 		}
 		to {
-			transform: rotateX(10deg) translate(-50%, 17vw) scaleY(-1);
+			transform: rotateX(15deg) translate(-50%, 17vw) scaleY(-1);
 			filter: blur(.4em);
 		}
 	}
@@ -434,11 +435,11 @@ body {
 @media only screen and (max-width: 600px) {
 	@keyframes script-shadow {
 		from {
-			transform: rotateX(10deg) translate(-50%, 22vw) scaleY(-1);
+			transform: rotateX(15deg) translate(-50%, 25vw) scaleY(-1);
 			filter: blur(.2em);
 		}
 		to {
-			transform: rotateX(10deg) translate(-50%, 24vw) scaleY(-1);
+			transform: rotateX(15deg) translate(-50%, 27vw) scaleY(-1);
 			filter: blur(.4em);
 		}
 	}
