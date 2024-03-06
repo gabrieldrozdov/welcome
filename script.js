@@ -1,4 +1,5 @@
 const music = new Audio(`assets/audio/music-v2.mp3`);
+
 function startShow() {
 	const container = document.querySelector('.container');
 	const stage = document.querySelector('.stage');
@@ -75,7 +76,15 @@ let scriptLines = [
 	"in three",
 	"two",
 	"one"
-]
+];
+let players = [];
+let playerLine = 0;
+for (let i=0; i<scriptLines.length; i++) {
+	if (typeof(scriptLines[i]) != "number") {
+		players.push(new Tone.Player(`assets/audio/lines/line${playerLine}.mp3`).toDestination());
+		playerLine++;
+	}
+}
 
 let currentLine = 0;
 let actualLine = 0;
@@ -92,9 +101,8 @@ function runScript() {
 	} else {
 		scriptText.innerHTML = "<p>"+scriptLines[currentLine]+"</p>";
 		scriptShadow.innerHTML = "<p>"+scriptLines[currentLine]+"</p>";
-		let scriptAudio = new Audio(`assets/audio/lines/line${actualLine}.mp3`);
-		scriptAudio.autoplay = true;
-		scriptAudio.addEventListener('ended', () => {
+		players[actualLine].start();
+		players[actualLine].onstop = () => {
 			currentLine++;
 			actualLine++;
 			if (currentLine == scriptLines.length) {
@@ -102,6 +110,18 @@ function runScript() {
 			} else {
 				runScript();
 			}
-		})
+		};
+		// OLD CODE (doesnt work on mobile safari)
+		// let scriptAudio = new Audio(`assets/audio/lines/line${actualLine}.mp3`);
+		// scriptAudio.autoplay = true;
+		// scriptAudio.addEventListener('ended', () => {
+		// 	currentLine++;
+		// 	actualLine++;
+		// 	if (currentLine == scriptLines.length) {
+		// 		location.reload();
+		// 	} else {
+		// 		runScript();
+		// 	}
+		// })
 	}
 }
