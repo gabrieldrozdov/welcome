@@ -231,6 +231,7 @@ body {
 	z-index: 0;
 	top: 50%;
 	left: 50%;
+	min-width: 700px;
 	transform: translate(-50%, -50%);
 	width: 100%;
 }
@@ -240,6 +241,7 @@ body {
 	top: 50%;
 	left: 50%;
 	width: 100%;
+	min-width: 700px;
 	opacity: 0;
 	transform: translate(-50%, -50%);
 }
@@ -345,7 +347,6 @@ body {
 	justify-content: center;
 	z-index: 2;
 	pointer-events: none;
-	white-space: nowrap;
 	perspective: 100px;
 }
 .script-text {
@@ -392,6 +393,7 @@ body {
 	color: black;
 	font-size: 1.5vw;
 	width: 100vw;
+	white-space: nowrap;
 	height: 0;
 	line-height: 1em;
 	-webkit-text-stroke: .01em black;
@@ -411,27 +413,39 @@ body {
 		filter: blur(.4em);
 	}
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1200px) {
 	@keyframes script-shadow {
 		from {
-			transform: rotateX(10deg) translate(-50%, 16vw) scaleY(-1);
+			transform: rotateX(10deg) translate(-50%, 15vw) scaleY(-1);
 			filter: blur(.2em);
 		}
 		to {
-			transform: rotateX(10deg) translate(-50%, 18vw) scaleY(-1);
+			transform: rotateX(10deg) translate(-50%, 17vw) scaleY(-1);
 			filter: blur(.4em);
 		}
 	}
+	.script-text p {
+		font-size: 4vw;
+	}
+	.script-shadow p {
+		font-size: 4vw;
+	}
 }
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 600px) {
 	@keyframes script-shadow {
 		from {
-			transform: rotateX(10deg) translate(-50%, 14vw) scaleY(-1);
+			transform: rotateX(10deg) translate(-50%, 22vw) scaleY(-1);
 			filter: blur(.2em);
 		}
 		to {
-			transform: rotateX(10deg) translate(-50%, 16vw) scaleY(-1);
+			transform: rotateX(10deg) translate(-50%, 24vw) scaleY(-1);
 			filter: blur(.4em);
 		}
+	}
+	.script-text p {
+		font-size: 6vw;
+	}
+	.script-shadow p {
+		font-size: 6vw;
 	}
 }
